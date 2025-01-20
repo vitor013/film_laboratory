@@ -1,7 +1,10 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './login.css';
 
 const Login = () => {
+  const navigate = useNavigate(); // Hook
+
   const [isRegistering, setIsRegistering] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -25,6 +28,9 @@ const Login = () => {
       console.log('Email:', email);
       console.log('Senha:', password);
       console.log('Lembrar login:', rememberLogin);
+      
+      // Redirecionar
+      navigate('/home');
     }
   };
 
