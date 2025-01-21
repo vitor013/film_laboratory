@@ -3,34 +3,36 @@ import { useNavigate } from 'react-router-dom';
 import './login.css';
 
 const Login = () => {
-  const navigate = useNavigate(); // Hook
-
   const [isRegistering, setIsRegistering] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [rememberLogin, setRememberLogin] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (isRegistering) {
       if (password !== confirmPassword) {
-        alert('As senhas não coincidem!');
+        setErrorMessage('As senhas não coincidem!');
         return;
       }
       console.log('Registrando novo usuário:');
       console.log('Nome:', name);
       console.log('Email:', email);
       console.log('Senha:', password);
+      setErrorMessage('Registro realizado com sucesso!');
     } else {
-      console.log('Fazendo login:');
-      console.log('Email:', email);
-      console.log('Senha:', password);
-      console.log('Lembrar login:', rememberLogin);
-      
-      // Redirecionar
-      navigate('/home');
+      if (email === 'admin' && password === 'admin') {
+        console.log('Login realizado com sucesso!');
+        setErrorMessage('');
+        navigate('/home');
+      } else {
+        setErrorMessage('Credenciais inválidas! Tente novamente.');
+      }
     }
   };
 
@@ -41,6 +43,7 @@ const Login = () => {
     setPassword('');
     setConfirmPassword('');
     setRememberLogin(false);
+    setErrorMessage('');
   };
 
   return (
@@ -59,7 +62,7 @@ const Login = () => {
           />
         )}
         <input
-          type="email"
+          type="text"
           placeholder="Digite seu e-mail"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -96,6 +99,8 @@ const Login = () => {
             Guardar login
           </label>
         )}
+
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
 
         <button type="submit" className="login-button">
           {isRegistering ? 'Registrar Novo Usuário' : 'Entrar'}
