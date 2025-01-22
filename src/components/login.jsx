@@ -10,6 +10,7 @@ const Login = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [rememberLogin, setRememberLogin] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [darkMode, setDarkMode] = useState(true);
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -46,10 +47,22 @@ const Login = () => {
     setErrorMessage('');
   };
 
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
+
   return (
-    <div className="login-container">
-      <form onSubmit={handleSubmit} className="login-form">
-        <h2 className="login-title">{isRegistering ? 'Registrar' : 'Login'}</h2>
+    <div className={`login-container ${darkMode ? 'dark' : 'light'}`}>
+      <button
+        className={`dark-mode-toggle ${darkMode ? 'dark' : 'light'}`}
+        onClick={toggleDarkMode}
+      >
+        {darkMode ? 'Light Mode' : 'Dark Mode'}
+      </button>
+      <form onSubmit={handleSubmit} className={`login-form ${darkMode ? 'dark' : 'light'}`}>
+        <h2 className={`login-title ${darkMode ? 'dark' : 'light'}`}>
+          {isRegistering ? 'Registrar' : 'Login'}
+        </h2>
 
         {isRegistering && (
           <input
@@ -57,7 +70,7 @@ const Login = () => {
             placeholder="Digite seu nome"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="login-input"
+            className={`login-input ${darkMode ? 'dark' : 'light'}`}
             required
           />
         )}
@@ -66,7 +79,7 @@ const Login = () => {
           placeholder="Digite seu e-mail"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="login-input"
+          className={`login-input ${darkMode ? 'dark' : 'light'}`}
           required
         />
         <input
@@ -74,7 +87,7 @@ const Login = () => {
           placeholder="Digite sua senha"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="login-input"
+          className={`login-input ${darkMode ? 'dark' : 'light'}`}
           required
         />
         {isRegistering && (
@@ -83,35 +96,36 @@ const Login = () => {
             placeholder="Repita sua senha"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
-            className="login-input"
+            className={`login-input ${darkMode ? 'dark' : 'light'}`}
             required
           />
         )}
 
         {!isRegistering && (
-          <label className="remember-label">
-            <input
-              type="checkbox"
-              checked={rememberLogin}
-              onChange={(e) => setRememberLogin(e.target.checked)}
-              className="remember-checkbox"
-            />
-            Guardar login
-          </label>
+          <div className="remember-container">
+            <label className={`remember-label ${darkMode ? 'dark' : 'light'}`}>
+              <input
+                type="checkbox"
+                checked={rememberLogin}
+                onChange={(e) => setRememberLogin(e.target.checked)}
+                className="remember-checkbox"
+              />
+              Guardar login
+            </label>
+          </div>
         )}
 
         {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-        <button type="submit" className="login-button">
-          {isRegistering ? 'Registrar Novo Usuário' : 'Entrar'}
+        <button type="submit" className={`login-button ${darkMode ? 'dark' : 'light'}`}>
+          {isRegistering ? 'Cadastre-se' : 'Entrar'}
         </button>
-        <button
-          type="button"
+        <p
           onClick={toggleRegistering}
-          className="register-button"
+          className={`register-button ${darkMode ? 'dark' : 'light'}`}
         >
-          {isRegistering ? 'Voltar ao Login' : 'Registrar'}
-        </button>
+          {isRegistering ? 'Voltar ao Login' : 'Não possui uma conta? Registre-se'}
+        </p>
       </form>
     </div>
   );

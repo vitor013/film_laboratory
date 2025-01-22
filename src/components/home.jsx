@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './home.css';
 
 const Home = () => {
@@ -10,6 +11,7 @@ const Home = () => {
   const [selectedMovie, setSelectedMovie] = useState(null);
 
   const API_KEY = '6908c6ce';
+  const navigate = useNavigate();
 
   const fetchMoviesByTitle = async (title) => {
     try {
@@ -88,9 +90,18 @@ const Home = () => {
     setSelectedMovie(null);
   };
 
+  const handleLogout = () => {
+    navigate('/');
+  };
+
   return (
     <div className="home-container">
       <h1>Film laboratory</h1>
+
+      {}
+      <button className="logout-button" onClick={handleLogout}>
+        Sair
+      </button>
 
       <form className="search-form" onSubmit={handleSearchSubmit}>
         <input
