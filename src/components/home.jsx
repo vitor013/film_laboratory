@@ -9,6 +9,7 @@ const Home = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [selectedMovie, setSelectedMovie] = useState(null);
+  const [darkMode, setDarkMode] = useState(true);
 
   const API_KEY = '6908c6ce';
   const navigate = useNavigate();
@@ -94,22 +95,32 @@ const Home = () => {
     navigate('/');
   };
 
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
+
   return (
-    <div className="home-container">
-      <h1>Film laboratory</h1>
+    <div className={`home-container ${darkMode ? 'dark' : 'light'}`}>
+      <div className="header">
+        <h1>Film laboratory</h1>
+        <button
+          className={`dark-mode-toggle ${darkMode ? 'dark' : 'light'}`}
+          onClick={toggleDarkMode}
+        >
+          {darkMode ? 'Light Mode' : 'Dark Mode'}
+        </button>
+        <button className="logout-button" onClick={handleLogout}>
+          Sair
+        </button>
+      </div>
 
-      {}
-      <button className="logout-button" onClick={handleLogout}>
-        Sair
-      </button>
-
-      <form className="search-form" onSubmit={handleSearchSubmit}>
+      <form className={`search-form ${darkMode ? 'dark' : 'light'}`} onSubmit={handleSearchSubmit}>
         <input
           type="text"
           placeholder="Buscar filme..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="search-input"
+          className={`search-input ${darkMode ? 'dark' : 'light'}`}
         />
       </form>
 
@@ -122,7 +133,7 @@ const Home = () => {
             {suggestions.map((movie) => (
               <div
                 key={movie.imdbID}
-                className="movie-card"
+                className={`movie-card ${darkMode ? 'dark' : 'light'}`}
                 onClick={() => fetchMovieDetails(movie.imdbID)}
               >
                 <img
@@ -147,7 +158,7 @@ const Home = () => {
           {movies.map((movie) => (
             <div
               key={movie.imdbID}
-              className="movie-card"
+              className={`movie-card ${darkMode ? 'dark' : 'light'}`}
               onClick={() => fetchMovieDetails(movie.imdbID)}
             >
               <img

@@ -34,13 +34,20 @@
 }
 
 .home-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
+  width: 100%; /* Ocupa 100% da largura */
+  height: 100vh; /* Ocupa 100% da altura da janela */
+  max-width: none; /* Remove a limitação de largura */
+  margin: 0; /* Remove margens externas */
+  padding: 20px; /* Mantém o espaçamento interno */
   font-family: Arial, sans-serif;
   color: #333;
   text-align: center;
+  display: flex; /* Garante que o conteúdo centralize */
+  flex-direction: column; /* Empilha os elementos verticalmente */
+  justify-content: flex-start; /* Alinha ao topo */
+  align-items: center; /* Centraliza horizontalmente */
 }
+
 
 h1 {
   font-size: 2.5rem;
@@ -212,4 +219,149 @@ margin-bottom: 20px;
 
 .logout-button:hover {
 background-color: #fb0000;
+}
+
+/* Tema claro */
+.home-container.light {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.home-container.light .movie-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+.home-container.light .search-input {
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+.home-container.light .dark-mode-toggle {
+  background-color: #333;
+  color: #fff;
+}
+
+/* Tema escuro */
+.home-container.dark {
+  background-color: #1e1e1e;
+  color: #f5f5f5;
+}
+
+.home-container.dark .movie-card {
+  background-color: #333;
+  border: 1px solid #444;
+}
+
+.home-container.dark .search-input {
+  background-color: #444;
+  color: #fff;
+  border: 1px solid #555;
+}
+
+.home-container.dark .dark-mode-toggle {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+/* Botões */
+.dark-mode-toggle,
+.logout-button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px 0;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.logout-button {
+  background-color: #ff5252;
+  color: #fff;
+}
+
+.logout-button:hover {
+  background-color: #e53935;
+}
+
+/* Formulário de busca */
+.search-form {
+  margin-bottom: 20px;
+}
+
+.search-input {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Cartões de filmes */
+.movie-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.movie-card {
+  width: 200px;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.movie-poster {
+  width: 100%;
+  height: auto;
+}
+
+.movie-info {
+  padding: 10px;
+  text-align: center;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+}
+
+.modal-content img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
 }
